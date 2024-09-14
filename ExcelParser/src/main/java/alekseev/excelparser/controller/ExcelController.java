@@ -1,21 +1,19 @@
 package alekseev.excelparser.controller;
 
 import alekseev.excelparser.dto.RequestDto;
-import alekseev.excelparser.util.ExcelConnection;
-import alekseev.excelparser.util.ExcelMapper;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import alekseev.excelparser.service.ExcelService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
-
-@Controller
+@RequiredArgsConstructor
+@RestController
 @RequestMapping("/api")
 public class ExcelController {
+    private final ExcelService excelService;
     @PostMapping("/parse")
-    public void parse(@RequestBody RequestDto requestDto){
-        ExcelMapper.getUserList(Objects.requireNonNull(ExcelConnection.loadFile(requestDto.getUrl())));
+    public ResponseEntity<String> parse(@RequestBody RequestDto requestDto){
+        excelService.saveUserFromExcel(requestDto.getUrl());
+        return ResponseEntity.ok("Пользователи добавлены");
     }
 }

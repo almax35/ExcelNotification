@@ -1,16 +1,13 @@
 package alekseev.excelparser.util;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 
 public class ExcelConnection {
-    public static HSSFWorkbook loadFile(String url) {
+    public static XSSFWorkbook loadFile(String url) {
         try {
-            POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(url));
-            HSSFWorkbook wb = new HSSFWorkbook(fs);
-            return wb;
+            FileInputStream file = new FileInputStream(url);
+            return new XSSFWorkbook(file);
         } catch (Exception e) {
             return null;
         }

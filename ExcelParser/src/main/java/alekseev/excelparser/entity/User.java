@@ -14,8 +14,7 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    @ManyToOne
-    @JoinColumn(name = "usergroup_id")
-    private UserGroup userGroup;
+
+    private String type;
 }
 
