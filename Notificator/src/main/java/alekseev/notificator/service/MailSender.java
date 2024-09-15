@@ -1,4 +1,5 @@
 package alekseev.notificator.service;
 
-public class Serv {
+public class MailSender {
+
 }

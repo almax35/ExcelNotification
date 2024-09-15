@@ -7,11 +7,11 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+
 
 public class ExcelMapper {
-    public static List<UserDto> getUserList(XSSFWorkbook workbook){
-        List<UserDto> userList = new ArrayList<>();
+    public static ArrayList<UserDto> getUserList(XSSFWorkbook workbook){
+        ArrayList<UserDto> userList = new ArrayList<>();
         XSSFSheet sheet = workbook.getSheetAt(0);
         Iterator<Row> rowIter = sheet.iterator();
         rowIter.next();

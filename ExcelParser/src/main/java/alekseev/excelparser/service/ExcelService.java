@@ -7,7 +7,7 @@ import alekseev.excelparser.util.ExcelMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @Service
@@ -15,9 +15,10 @@ import java.util.Objects;
 public class ExcelService {
     private final UserRepository userRepository;
 
-    public void saveUserFromExcel(String url){
-        List<UserDto> users = ExcelMapper.getUserList(Objects.requireNonNull(ExcelConnection.loadFile(url)));
+    public ArrayList<UserDto> saveUserFromExcel(String url){
+        ArrayList<UserDto> users = ExcelMapper.getUserList(Objects.requireNonNull(ExcelConnection.loadFile(url)));
         userRepository.saveAll(users);
+        return users;
     }
 
 }
