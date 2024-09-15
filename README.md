@@ -10,4 +10,5 @@ ExcelParser service:
 Notificator service:
 - Core: Springboot 3, Java 17
 - Spring Mvc, Data Jpa
-- Mail
+- Mail: Spring mail, Gmail smtp server
+  
