@@ -1,6 +1,9 @@
 package alekseev.notificator.service;
 
 import alekseev.notificator.dto.UserDto;
+import alekseev.notificator.repository.UserRepository;
+import alekseev.notificator.utils.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,13 +13,14 @@ import java.util.ArrayList;
 
 
 @Service
+@RequiredArgsConstructor
 public class MailSenderService {
     @Autowired
     private JavaMailSender javaMailSender;
+    private final UserRepository userRepository;
 
     public void sendEmail(String toEmail, String subject, String body){
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
-        simpleMailMessage.setFrom("excelnotificator@gmail.com");
         simpleMailMessage.setTo(toEmail);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(body);
@@ -27,5 +31,9 @@ public class MailSenderService {
         for (UserDto userDto: users){
            sendEmail(userDto.getEmail(),"test mail", "hello,"+userDto.getName()+" "+userDto.getSurname());
         }
+    }
+
+    public void sendEmailsByType(String type){
+        sendEmails(UserMapper.parseUserToUserDto(userRepository.findAllByType(type)));
     }
 }

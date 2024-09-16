@@ -16,7 +16,7 @@ public class UsersConsumer {
 
     @KafkaListener(topics = "users", groupId = "users_group")
     public void listenUsers(String users){
-        ArrayList<UserDto> userList = UserMapper.parseToUserDto(users);
+        ArrayList<UserDto> userList = UserMapper.parseJsonToUserDto(users);
         mailSenderService.sendEmails(userList);
     }
 }

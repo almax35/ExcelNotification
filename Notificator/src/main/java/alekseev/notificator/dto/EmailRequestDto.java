@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RequestDto {
+public class EmailRequestDto {
     private String email;
     private String subject;
     private String text;
