@@ -1,7 +1,6 @@
 package alekseev.notificator.service;
 
 import alekseev.notificator.dto.UserDto;
-import alekseev.notificator.repository.UserRepository;
 import alekseev.notificator.utils.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 public class MailSenderService {
     @Autowired
     private JavaMailSender javaMailSender;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     public void sendEmail(String toEmail, String subject, String body){
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
@@ -34,6 +33,6 @@ public class MailSenderService {
     }
 
     public void sendEmailsByType(String type){
-        sendEmails(UserMapper.parseUserToUserDto(userRepository.findAllByType(type)));
+        sendEmails(UserMapper.parseUserToUserDto(userService.getUsersByType(type)));
     }
 }
